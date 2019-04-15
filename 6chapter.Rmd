@@ -1,0 +1,146 @@
+```{r}
+library(dplyr)
+```
+
+```{r}
+exam <- read.csv("csv_exam.csv")
+exam %>% filter(class == 1)
+```
+
+```{r}
+exam %>% filter(class != 1)
+```
+
+```{r}
+exam %>% filter(class %in% c(1,3,5))
+```
+
+```{r}
+exam %>% filter(class == 1 | class == 3 | class == 5)
+```
+
+```{r}
+exam %>% 
+  select(math) %>%  
+  head
+```
+
+```{r}
+exam %>% arrange(desc(math))
+```
+
+```{r}
+exam %>% 
+  mutate(total = math + english + science) %>% 
+  head
+```
+
+```{r}
+exam %>% 
+  mutate(class = ifelse(math >= mean(math), "math good", "math bed")) %>% 
+  arrange(desc(math))
+  head
+```
+
+```{r}
+exam %>%
+  group_by(class) %>% 
+  summarise(mean_math = mean(math))
+```
+
+```{r}
+exam %>%
+  group_by(class) %>% 
+  summarise(mean_math = mean(math),
+            sum_math = sum(math),
+            median_math = median(math),
+            n = n())
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+mpg %>% 
+  group_by(manufacturer, drv) %>% 
+  summarise(mean_cty=mean(cty)) %>% 
+  head()
+```
+
+```{r}
+mpg %>% 
+  group_by(manufacturer) %>% 
+  filter(class == "suv") %>% 
+  mutate(tot = (cty+hwy)/2) %>% 
+  summarise(mean_tot = mean(tot)) %>% 
+  arrange(desc(mean_tot)) %>% 
+  head
+```
+
+```{r}
+test1 <- data.frame(id = c(1,2,3,4,5),
+                   midterm = c(60,70,80,90,100))
+
+test2 <- data.frame(id = c(1,2,3,4,5),
+                    final= = c(80,70,90,60,40))
+```
+
+```{r}
+total <- left_join(test1, test2, by="id")
+```
+
+```{r}
+total
+```
+
+```{r}
+total2 <- bind_rows(test1,test2)
+```
+
+```{r}
+total2
+```
+
+```{r}
+test1 <- data.frame(id = c(1,2,3,4,5),
+                   test = c(60,70,80,90,100))
+
+test2 <- data.frame(id = c(1,2,3,4,5),
+                    test = c(80,70,90,60,40))
+```
+
+```{r}
+total2 <- bind_rows(test1,test2)
+total2 %>% arrange(test)
+```
+
+```{r}
+fuel <- data.frame(fl = c("c","d","e","p","r"),
+                   price_fl = c(2.35, 2.38, 2.11, 2.76, 2.22),
+                   stringsAsFactors = F)
+```
+
+```{r}
+fuel
+```
+
+```{r}
+mpg2
+```
+```{r}
+library(ggplot2)
+```
+
+```{r}
+mpg3 = mpg2 %>% group_by(fl)
+```
+
+```{r}
+mpg4 <- left_join(mpg2, fuel, by = "fl")
+```
+
+```{r}
+mpg4
+```
+

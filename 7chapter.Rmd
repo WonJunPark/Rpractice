@@ -1,0 +1,104 @@
+```{r}
+df <- data.frame(sex = c("M","F",NA,"M","F"),
+                 score = c(5,4,3,4,NA))
+```
+
+```{r}
+is.na(df)
+```
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+df %>% filter(!is.na(score) & !is.na(sex))
+```
+
+```{r}
+df2 <- na.omit(df)
+```
+
+```{r}
+df2
+```
+
+```{r}
+mean(df$score, na.rm=T)
+```
+
+```{r}
+sum(df$score, na.rm=T)
+```
+
+```{r}
+exam <- read.csv("csv_exam.csv")
+```
+
+```{r}
+exam[c(3,8,15),"math"]<- NA
+exam
+```
+
+```{r}
+mean(exam$math, na.rm=T)
+```
+
+```{r}
+exam$math <- ifelse(is.na(exam$math),mean(exam$math, na.rm=T),exam$math)
+```
+
+```{r}
+mean(exam$math)
+```
+
+```{r}
+outlier <- data.frame(sex = c(1,2,1,3,2,1),
+                      score = c(5,4,3,4,2,6))
+```
+
+```{r}
+outlier$sex <- ifelse(outlier$sex == 3, NA,outlier$sex)
+outlier$score <- ifelse(outlier$score > 5, NA, outlier$score)
+```
+
+```{r}
+outlier %>% filter(!is.na(sex) & !is.na(score)) %>% group_by(sex) %>% summarise(mean_score = mean(score))
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+mpg <- data.frame(ggplot2::mpg)
+```
+
+```{r}
+boxplot(mpg$hwy)$stats
+```
+
+```{r}
+mpg$hwy <- ifelse(mpg$hwy < 12 | mpg$hwy > 37, NA, mpg$hwy)
+```
+
+```{r}
+mpg %>% group_by(drv) %>% summarise(mean_hwy = mean(hwy,na.rm=T))
+```
+
+```{r}
+mpg <- as.data.frame(ggplot2::mpg)
+```
+
+```{r}
+mpg[c(10,14,58,93),"drv"] <- "k"
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+

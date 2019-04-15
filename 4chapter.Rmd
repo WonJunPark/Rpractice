@@ -1,0 +1,61 @@
+#4-1,2 . 데이터 프레임
+# 데이터 프레임은 가장 많이 사용하는 데이터 형태로, 행과 열로 구성된 사각형 모양의 표입니다.
+```{r}
+english <- c(90,80,60,70)
+math <- c(50,60,100,20)
+```
+#column : 세로로 나열되는 속성, column or variable
+#row : 각 속성의 정보, row or case
+```{r}
+df <- data.frame(english, math)
+df
+```
+
+```{r}
+mean(df$english)
+mean(df$math)
+```
+
+```{r}
+df2 <- data.frame(english = c(90,80,60,70), math = c(50,60,100,20))
+df2
+```
+#4-3. 외부 데이터 이용
+#1. 엑셀 
+```{r}
+library(readxl)
+df <- read_excel("d:/abc/test/test.xlsx") 
+```
+#파일 경로 지정시, 경로 지정시 /
+```{r}
+df <- read_excel("test.xlsx", col_names = F)
+df <- read_excel("test.xlsx", sheet = 3)
+```
+# 만약 변수명 없이 첫 번째 행부터 바로 데이터가 시작되는 경우, 첫 번째 행의 데이터가 변수명으로 지정되면서 데이터가 유실되는 문제가 발생합니다. 
+#이럴 때 col_names = F 파라미터를 설정하면 첫 번째 행을 변수명이 아닌 데이터로 인식해 불러옵니다.
+
+#csv(comma-separated Values)
+```{r}
+df <- read.csv("test.csv")
+df <- read.csv("test.csv", header = F)
+```
+#문자가 있을때 지정, factor 타입을 불러오지 않는다.
+```{r}
+df <- read.csv("test.csv", stringsAsFactors = F)
+```
+
+```{r}
+df <- data.frame(english = c(90,80,60,70),
+                 math = c(50,60,100,20))
+write.csv(df, file = "fileName.csv")
+```
+#RData파일 
+```{r}
+load("fileName.rda")
+save(df, file = "fileName.rda")
+```
+
+```{r}
+help(qplot)
+```
+

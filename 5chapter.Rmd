@@ -1,0 +1,84 @@
+```{r}
+library(ggplot2)
+```
+
+```{r}
+mpg2 <- as.data.frame(ggplot2::mpg)
+```
+
+```{r}
+str(mpg2)
+```
+
+```{r}
+summary(mpg2)
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+midwest2 <- as.data.frame(ggplot2::midwest)
+```
+
+```{r}
+str(midwest2)
+```
+
+```{r}
+summary(midwest2)
+```
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+midwest2 <- rename(midwest2, total = poptotal)
+```
+
+```{r}
+midwest2 <- rename(midwest2, asian = popasian)
+```
+
+```{r}
+str(midwest2)
+```
+
+```{r}
+midwest2$percent <- midwest2$asian/midwest2$total*100
+```
+
+```{r}
+head(midwest2$percent)
+```
+
+```{r}
+mean(midwest2$percent)
+```
+
+```{r}
+midwest2$test <- ifelse(midwest2$percent > mean(midwest2$percent),"large","small")
+```
+
+```{r}
+View(midwest2)
+```
+
+```{r}
+table(midwest2$test)
+```
+
+```{r}
+qplot(data = midwest2, test)
+```
+
+```{r}
+
+```
+
+
+
+
+
